@@ -1,0 +1,92 @@
+# tls:
+#   certificates:
+#     - certFile: "D:/app/traefik/ssl/server.crt"
+#       keyFile: "D:/app/traefik/ssl/server.key"
+      # stores:
+      #   - default
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: "D:/app/traefik/ssl/server.crt"
+        keyFile: "D:/app/traefik/ssl/server.key"
+
+
+# http:
+#   routers:
+#       myweb:
+#         rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/`)"
+#         service: website
+#         entryPoints:
+#           - web
+
+
+http:
+  routers:
+      myweb:
+        rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/`)"
+        service: website
+        entryPoints:
+          - web
+
+      myweb-ssl:
+        rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/`)"
+        service: website-ssl
+        tls: {}
+        entryPoints:
+          - websecure
+
+# FOR HTTPS
+      myapp1:
+        rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/app1`)"
+        service: app1
+        tls: {}
+        entryPoints:
+          - websecure
+
+# FOR HTTPS
+      myapp2:
+        rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/app2`)"
+        service: app2
+        tls: {}
+        entryPoints:
+          - websecure
+
+# FOR HTTP
+      myapp3:
+        rule: "Host(`test.127-0-0-1.nip.io`) && Path(`/app3`)"
+        service: app3
+
+
+  services:
+
+    website:
+      loadBalancer:
+        servers:
+        - url: 'http://127.0.0.1:5001'
+        - url: 'http://127.0.0.1:5002'
+        - url: 'http://127.0.0.1:5003'
+
+    website-ssl:
+      loadBalancer:
+        servers:
+        - url: 'http://127.0.0.1:5005'
+
+    app1:
+      loadBalancer:
+        servers:
+        - url: 'http://127.0.0.1:5001'
+        - url: 'http://127.0.0.1:5005'
+
+    app2:
+      loadBalancer:
+        servers:
+        - url: 'http://127.0.0.1:5002'
+        - url: 'http://127.0.0.1:5005'
+
+    app3:
+      loadBalancer:
+        servers:
+        - url: 'http://127.0.0.1:5003'
+        - url: 'http://127.0.0.1:5005'

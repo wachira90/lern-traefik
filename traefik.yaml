@@ -1,0 +1,32 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+api:
+  dashboard: true
+  insecure: true
+  
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+
+log:
+  level: DEBUG
+  format: json
+
+
+providers:
+  # docker:
+  #   endpoint: tcp://10.10.10.10:2375
+  file:
+    filename: .\routes.yml
+    watch: true
+  # docker:
+  #   endpoint: tcp://10.10.10.10:2375
+
+# accessLog:
+#   filePath: .\log\log.txt
+#   format: json
+  # format: genericCLF
