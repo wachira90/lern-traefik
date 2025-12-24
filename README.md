@@ -16,7 +16,7 @@ https://github.com/traefik/traefik/releases/download/v3.6.5/traefik_v3.6.5_linux
 ## WINDOWS
 
 ```
-https://github.com/traefik/traefik/releases/download/v2.11.33/traefik_v2.11.33_windows_amd64.zip
+https://github.com/traefik/traefik/releases/download/v3.6.5/traefik_v3.6.5_windows_amd64.zip
 ```
 
 ## START WEB
